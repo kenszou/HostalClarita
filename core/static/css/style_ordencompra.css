@@ -1,0 +1,65 @@
+#dropdownMenuLink
+{
+  border-radius: 5px;
+  background:none;
+  color: black;
+  border-radius: 5px;
+  border: 2px solid;
+}
+#navbarNav li a
+{
+  text-align: center;
+  color: black;
+  margin-right: 2px;
+}
+
+#navbarNav li a:hover
+{
+  background-color:#16CE97;
+  border-radius: 4px;
+  color: #ffffff;
+}
+.mainfooter
+{
+  background-color:rgb(235, 233, 233);
+  border-width: 4px;
+  line-height: 24px;
+  padding: 45px 0 20px;
+  min-height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(109.6deg);
+}
+
+.mainfooter hr{
+  border-top-color: #bbb;
+  opacity: 0.5;
+}
+
+.mainfooter hr.small
+{
+  margin: 20px 0;
+}
+
+.copyright-text
+{
+  margin: 0;
+}
+#face1, #twit1,#insta1
+{
+  margin-left: 4px;
+  margin-right: 0px;
+}
+
+@keyframes cambio
+{
+    0% {margin-left: 0%;}
+    20% {margin-left: 0%;}
+    25% {margin-left: -100%;}
+    45% {margin-left: -100%;}
+    50% {margin-left: -200%;}
+    70% {margin-left: -200%;}
+    75% {margin-left: -300%;}
+    100% {margin-left: -300%;}
+}

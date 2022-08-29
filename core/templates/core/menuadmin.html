@@ -1,0 +1,418 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/Style_home.css' %}">
+  <link rel="icon" type="image/png" href="{% static 'img/logoHC.png' %}" />
+  <title>INICIO | Hostal Clarita</title>
+</head>
+<style>
+  ::selection {
+    color: #fff;
+    background: #7d0b8a;
+  }
+</style>
+
+<body>
+  <div class="container-fluid" id="allpage">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" id="menubar">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img src="{% static 'img/logoClarita.png' %}" width="250px" id="logoFront"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <!--ms-auto deja menu a la derecha -->
+          <ul class="navbar-nav  ms-auto" id="menux">
+
+            <li class="nav-item">
+              <a class="nav-link" href="javascript: history.go(-1)">VOLVER</a>
+            </li>
+            &nbsp;
+            <div class="dropdown" id="loggin">
+
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                {{ user.username }}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                {% if user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesión</a></li>
+                <li><a class="dropdown-item" href="registro">Registrarse</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </ul>
+        </div>
+      </div>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </nav>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    {% if messages %}
+    {% for m in messages %}
+    <script>
+      swal.fire({
+        "title": "Felicitaciones",
+        "text": "{{m}}",
+        "icon": "success"
+      })
+    </script>
+    {% endfor %}
+    {% endif %}
+    <br>
+    <section id="team">
+      <div class="container">
+
+        <h5 class="section-title h1 text-center">Menú Hostal Clarita</h5>
+        <a href="menu_manual" class="btn btn-outline-success btn-lg">Manuales de usuarios</a>
+        <hr>
+        <div class="row">
+          <!-- VISTA EMPLEADO -->
+          {% if perms.core.add_usuario %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/RegCliente.svg' %}" width=150px height=150px
+                          alt="card image" id="imgMenu"></p>
+                      <a href="registro" class="btn btn-primary btn-lg">Registrar Cliente</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if perms.core.add_cliente %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/Huesped.svg' %}" width=150px height=150px alt="card image"
+                          id="imgMenu"></p>
+                      <a href="huesped" class="btn btn-primary btn-lg">Registro de Huesped</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if perms.core.add_cliente %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/RegHuesped.svg' %}" width=150px height=150px
+                          alt="card image" id="imgMenu"></p>
+                      <a href="reserva-huesped" class="btn btn-primary btn-lg">Reserva Habitacion</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if perms.core.add_cliente %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/addRoom.svg' %}" width=150px height=150px alt="card image"
+                          id="imgMenu"></p>
+                      <a href="registro-habitacion" class="btn btn-primary btn-lg">Listado de habitaciones</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+
+          {% if perms.core.view_bodega %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/addFactura.svg' %}" width=150px height=150px
+                          alt="card image" id="imgMenu"></p>
+                      <a href="factura-registro" class="btn btn-primary btn-lg">Registro de factura</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if perms.core.view_cliente %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/buscarFactura2.svg' %}" width=150px height=150px
+                          alt="card image" id="imgMenu"></p>
+                      <a href="buscar_factura" class="btn btn-primary btn-lg">Buscador de facturas</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          <div><br></div>
+
+          {% if perms.core.view_bodega %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/RecePedido.svg' %}" width=150px height=150px
+                          alt="card image" id="imgMenu"></p>
+                      <a href="registro-pedido" class="btn btn-primary btn-lg">Recepcion Pedido</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if perms.core.view_pedido %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/listadopedido.svg' %}" width=150px height=150px
+                          alt="card image" id="imgMenu"></p>
+                      <a href="recepcion-pedido" class="btn btn-primary btn-lg">Listado de Pedido</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if perms.core.add_usuario %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/addEmpresa.svg' %}" width=150px height=150px
+                          alt="card image" id="imgMenu"></p>
+                      <a href="empresa" class="btn btn-primary btn-lg">Agregar Empresa</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if perms.core.add_usuario %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class=" img" src="{% static 'img/RegProveedor.svg' %}" width=150px height=150px
+                          alt="card image" id="imgMenu"></p>
+                      <a href="registro-proveedor" class="btn btn-primary btn-lg">Registrar proveedor</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if perms.core.view_bodega %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/addPedido.svg' %}" width=150px height=150px
+                          alt="card image" id="imgMenu"></p>
+                      <a href="orden-compra" class="btn btn-primary btn-lg">Generar Orden Pedido</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if perms.core.add_usuario %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/NewUser.svg' %}" width=150px height=150px alt="card image"
+                          id="imgMenu"></p>
+                      <a href="nuevo-usuario" class="btn btn-primary btn-lg">Nuevo Usuario</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          <div><br></div>
+
+          {% if perms.core.view_usuario %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/EditUser.svg' %}" width=150px height=150px
+                          alt="card image" id="imgMenu"></p>
+                      <a href="listado-usuario" class="btn btn-primary btn-lg">Modificar / Listar Usuario</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if perms.core.view_usuario %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/food.svg' %}" width=150px height=150px
+                          alt="card image" id="imgMenu"></p>
+                      <a href="comedor" class="btn btn-primary btn-lg">Menu de comedor</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if perms.core.view_usuario %}
+          <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/reportegeneral.svg' %}" width=150px height=150px
+                          alt="card image" id="imgMenu"></p>
+                      <a href="menu_reporte" class="btn btn-primary btn-lg">Menu de Reportes</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+<!--           <div class="col-xs-8 col-sm-6 col-md-2" data-aos="zoom-in-up">
+            <div class="image-flip">
+              <div class="mainflip flip-0">
+                <div class="frontside">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class="img" src="{% static 'img/manual.svg' %}" width=150px height=150px
+                          alt="card image" id="imgMenu"></p>
+                      <a href="menu_manual" class="btn btn-primary btn-lg">Manuales Hostal Clarita</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <div><br></div>
+        </div>
+      </div>
+    </section>
+    <footer class="mainfooter">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-sm-12 col-md-6">
+            <h6>Hostal Clarita</h6>
+            <p class="text-justify">Av. Ahumada Esq. Dagoberto 1283</p>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <h6>Redes</h6>
+            <a href="https://www.facebook.com/"><img id="face" src="{% static '/img/facebook.png' %}"></a>
+            <a href="http://instagram.com/"><img id="insta" src="{% static '/img/instagram.png' %}"></a>
+            <a href="https://twitter.com/?lang=es"><img id="twit" src="{% static '/img/twitter.png' %}"></a>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <a href="#"><img id="footlogo" src="{% static '/img/logoClarita.png' %}" width="250px"></a>
+          </div>
+
+          <div class=" col-md-8 col-sm-6 col-12">
+            <p class="copyright-text">Copyright &copy; 2021 Todos Derechos reservados </p>
+            <a href="#">SCRUM-BOTS</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+    integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
+  </script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+    integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>

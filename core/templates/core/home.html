@@ -1,0 +1,308 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/Style_home.css' %}">
+  <link rel="icon" type="image/png" href="{% static 'img/logoHC.png' %}" />
+  <title>INICIO | Hostal Clarita</title>
+</head>
+<style>
+  ::selection
+  {
+    color: #fff;
+    background: #7d0b8a;
+  }
+  </style>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" id="menubar">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img src="{% static 'img/logoClarita.png' %}" width="250px" id="logoFront"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <!--ms-auto deja menu a la derecha -->
+          <ul class="navbar-nav  ms-auto" id="menux">
+
+
+            {% if perms.core.view_cliente %}
+            <li class="nav-item">
+              <a class="nav-link" href="menu-admin">MENU DE USUARIOS</a>
+            </li>
+            {% endif %}
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#nosotros">Nosotros</a>
+            </li>
+            
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#habitaciones">Nuestros Servicios</a>
+            </li>
+            
+            
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#galeria">Galeria</a>
+            </li>
+            <div class="dropdown" id="loggin"> 
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Iniciar Sesión ➤{{ user.username }}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                {% if user.is_authenticated %}
+                <li><a class="dropdown-item" href="#">{{ user.username }}</a></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesión</a></li>
+                <li><a class="dropdown-item" href="registro">Registrarse</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    {% if messages %}
+    {% for m in messages %}
+    <script>
+      swal.fire({
+        "title": "Felicitaciones",
+        "text": "{{m}}",
+        "icon": "success"
+      })
+    </script>
+    {% endfor %}
+    {% endif %}
+    <br>
+
+
+    <!-- BACKGROUND DEL HOME -->
+    <div class="container-fluid" id="hero">
+      <div class="texto_pri">
+        <h1>HOSTAL DOÑA CLARITA</h1>
+      </div>
+      <div class="clarita_wave" overflow: hidden; ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M-0.00,49.98 C150.00,149.99 349.20,-49.98 500.00,49.98 L500.00,149.99 L-0.00,149.99 Z" style="stroke: none; fill: rgb(255, 255, 255);"></path></svg></div>
+    </div>
+    
+    <br>
+    <br>
+
+    <div class="container bg-light" id="nosotros" data-aos="fade-right" data-aos-duration="3000" >
+      <br>
+      <link href="https://fonts.googleapis.com/css2?family=Acme&family=Bree+Serif&family=Fredoka+One&family=Lobster&display=swap" rel="stylesheet">
+      <div class="text-center margintop-sm">
+        <h2>Nos especializamos en el buen servicio</h2>
+      </div>
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-6">
+          <img src="{% static '/img/nosotros.jpeg' %}" class="img-fluid" heigth="400px">
+        </div>
+        <div class="col-6">
+          <br>
+          <p align ="justify">Hostal turista superior, con sello de calidad, ubicado estratégicamente a pasos del metro Parque Bustamante
+            y Metro Baquedano, cerca de importantes casas de estudio, hospitales y lugares entretenidos , a una cuadra
+            de supermercado, farmacias y lugares de interés para tu desenvolvimiento diario en Santiago.</p>
+          <br>
+          <p align ="justify">No distingue, la totalidad de habitaciones con baño privado, aire acondicionado, wi-fi en habitación y una
+            gran trayectoria en hotelería. Experiencia que nos indica como los más adecuados para tu estadía estadía en
+            Santiago.
+            Estamos muy bien evaluados en distintos sitios en Internet como Google, tripadvisor y booking.</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <!-- CARRUSEL DE GALERIA -->
+    <div class="row justify-content-center" id="Carrusel">
+      <div class="col-12">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+              aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+              aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+              aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="{% static '/img/ban1.jpg' %}" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5></h5>
+                <p></p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="{% static '/img/ban2.jpg' %}" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5></h5>
+                <p></p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="{% static '/img/ban3.jpg' %}" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5></h5>
+                <p></p>
+              </div>
+            </div>
+          </div>
+
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="container" id="habitaciones" data-aos="fade-left"data-aos-duration="2000">
+      <div class="row">
+        <div class="col-5 et_pb_text_inner">
+          <h1>NUESTROS</h1>
+          <H1>SERVICIOS A OFRECER</H1>
+        </div>
+        <div class="col-6">
+          <br>
+          <p class="font-weight-bold">Cómodas habitaciones con buena vista, estándar, baño, TV clable y WIFI</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div class="container" id="port">
+      <div class="row">
+
+
+        <div class="col-md-4"data-aos="zoom-in" data-aos-duration="1000">
+          <div class="infoport">
+            <div class="detalle">
+              <a href="#">
+                <h2>Servicio basico</h2>
+              </a>
+              <a href="#">
+                <p>Nuestro servicio basico cuenta con las siguientes especificaciones</p>
+              </a>
+            </div>
+            <img src="{% static '/img/comedor1.jpg' %}"class="img-fluid" alt="port1">
+          </div>
+        </div>
+
+
+        <div class="col-md-4"data-aos="zoom-in" data-aos-duration="2000">
+          <div class="infoport">
+            <div class="detalle">
+              <a href="#">
+                <h2>Servicio Medio</h2>
+              </a>
+              <a href="#">
+                <p>Nuestro servicio Medio cuenta con las siguientes especificaciones</p>
+              </a>
+            </div>
+            <img src="{% static '/img/comedor2.jpg' %}"class="img-fluid" alt="port1">
+          </div>
+        </div>
+
+        <div class="col-md-4"data-aos="zoom-in" data-aos-duration="3000">
+          <div class="infoport">
+            <div class="detalle">
+              <a href="#">
+                <h2>Servicio premium</h2>
+              </a>
+              <a href="#">
+                <p>Nuestro servicio basico cuenta con las siguientes especificaciones</p>
+              </a>
+            </div>
+            <img src="{% static '/img/comedor3.jpg' %}"class="img-fluid" alt="port1">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <section id="galeria" class="container">
+      <div class="text-center pt-5">
+        <h2>GALERIA</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12"data-aos="zoom-in-up" data-aos-duration="1000"><img src="{% static '/img/gal1.jpg' %}" alt=""></div>
+        <div class="col-lg-4 col-md-6 col-sm-12"data-aos="zoom-in-up" data-aos-duration="2000"><img src="{% static '/img/gal2.jpg' %}" alt=""></div>
+        <div class="col-lg-4 col-md-6 col-sm-12"data-aos="zoom-in-up" data-aos-duration="3000"><img src="{% static '/img/gal3.jpg' %}" alt=""></div>
+        <div class="col-lg-4 col-md-6 col-sm-12"data-aos="zoom-in-up" data-aos-duration="3000"><img src="{% static '/img/gal4.jpg' %}" alt=""></div>
+        <div class="col-lg-4 col-md-6 col-sm-12"data-aos="zoom-in-up" data-aos-duration="2000"><img src="{% static '/img/gal5.jpg' %}" alt=""></div>
+        <div class="col-lg-4 col-md-6 col-sm-12"data-aos="zoom-in-up" data-aos-duration="1000"><img src="{% static '/img/gal6.jpg' %}" alt=""></div>
+      </div>
+    </section>
+    <br>
+    <footer class="mainfooter">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-sm-12 col-md-6">
+            <h6>Hostal Clarita</h6>
+            <p class="text-justify">Av. Ahumada Esq. Dagoberto 1283</p>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <h6>Redes</h6>
+            <a href="https://www.facebook.com/"><img id="face" src="{% static '/img/facebook.png' %}"></a>
+            <a href="http://instagram.com/"><img id="insta" src="{% static '/img/instagram.png' %}"></a>
+            <a href="https://twitter.com/?lang=es"><img id="twit" src="{% static '/img/twitter.png' %}"></a>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <a href="#"><img id="footlogo" src="{% static '/img/logoClarita.png' %}" width="250px"></a>
+          </div>
+
+          <div class=" col-md-8 col-sm-6 col-12">
+            <p class="copyright-text">Copyright &copy; 2021 Todos Derechos reservados </p>
+            <a href="#">SCRUM-BOTS</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+    integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+    crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+    integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
